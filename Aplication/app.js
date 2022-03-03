@@ -1,11 +1,22 @@
 //ultilizando express
 const express = require('express');
 const short = require('shortid')
+const fs = require('fs')
+
 const app = express();
+
 
 app.use(express.json())
 
-const vendas = [];
+let vendas = [];
+
+fs.readFile("vendas.json", "utf-8", (err, data) => {
+    if(err) {
+        console.log(err);
+    }else{
+        vendas = JSON.parse(data)
+    }
+})
 
 /**
  * Post = inserir dados 
@@ -26,6 +37,7 @@ app.post("/vendas", (request, response) => {
         itens
     }
     vendas.push(venda);
+    createVendasFile()
 
     return response.json(venda);
 });
@@ -47,9 +59,11 @@ app.put("/vendas/:id", (request, response) => {
     const vendasindex = vendas.findIndex(venda => venda.id === id);
     vendas[vendasindex] = {
         ...vendas[vendasindex],
+        cliente,
         data,
         itens
     }
+    createVendasFile()
     return response.json({'mensagem' : 'Produto alterado com sucesso'})
 });
 
@@ -59,8 +73,17 @@ app.delete("/vendas/:id", (request, response) => {
 
     vendas.splice(vendasindex, 1);
     return response.json({'mensagem': 'Produto removido com sucesso'})
-})
+});
 
+function createVendasFile() {
+    fs.writeFile("vendas.json", JSON.stringify(vendas), (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log("Venda inserida!")
+        }
+    });
+}
 
 
 app.listen(4001, () => console.log('Servidor rodando na porta 4001'));

@@ -4,7 +4,7 @@ content-type: application/json
     {
         "data": "2019-01-01",
         "cliente": {
-            "nome": "foão Marcos be",
+            "nome": "joão Marcos silva",
             "cpf": "000.000.000-00",
             "endereco": "Rua dos Bobos, 0"
         },
@@ -29,10 +29,10 @@ content-type: application/json
 GET http://localhost:4001/vendas
 
 ###
-GET http://localhost:4001/vendas/33zFY4G5i
+GET http://localhost:4001/vendas/Rcwdvgx6J
 
 ###
-PUT http://localhost:4001/vendas/33zFY4G5i
+PUT http://localhost:4001/vendas/Rcwdvgx6J
 content-type: application/json
 
     {
@@ -56,9 +56,9 @@ content-type: application/json
                 }
             },
             {
-            "produto": {
-                "nome": "Produto 03",
-                "preco": 500
+                "produto": {
+                    "nome": "Produto 03",
+                    "preco": 500
             }
             }
         ]
@@ -66,4 +66,4 @@ content-type: application/json
 
 ###
 
-DELETE http://localhost:4001/vendas/33zFY4G5i
+DELETE http://localhost:4001/vendas/AIE8-vtv-
