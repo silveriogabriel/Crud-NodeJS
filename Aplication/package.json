@@ -1,0 +1,22 @@
+{
+  "name": "aplication",
+  "version": "1.0.0",
+  "description": "Projeto NodeJS cadastro de pessoas",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/silveriogabriel/Crud-NodeJS"
+  },
+  "author": "Gabriel Vinicius Silverio",
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "express": "^4.17.3",
+    "nodeman": "^1.1.2",
+    "nodemon": "^2.0.15",
+    "shortid": "^2.2.16"
+  }
+}

@@ -1,0 +1,69 @@
+POST http://localhost:4001/vendas
+content-type: application/json
+
+    {
+        "data": "2019-01-01",
+        "cliente": {
+            "nome": "foão Marcos be",
+            "cpf": "000.000.000-00",
+            "endereco": "Rua dos Bobos, 0"
+        },
+        "itens": [
+            {
+                "produto": {
+                    "nome": "Produto 01",
+                    "preco": 100
+                }
+            },
+            {
+                "produto": {
+                    "nome": "Produto 02",
+                    "preco": 200
+                }
+            }
+        ]
+    }
+
+###
+
+GET http://localhost:4001/vendas
+
+###
+GET http://localhost:4001/vendas/33zFY4G5i
+
+###
+PUT http://localhost:4001/vendas/33zFY4G5i
+content-type: application/json
+
+    {
+        "data": "2019-01-01",
+        "cliente": {
+            "nome": "João Marcos silva",
+            "cpf": "000.000.000-00",
+            "endereco": "Rua dos Bobos, 0"
+        },
+        "itens": [
+            {
+                "produto": {
+                    "nome": "Produto 01",
+                    "preco": 100
+                }
+            },
+            {
+                "produto": {
+                    "nome": "Produto 02",
+                    "preco": 200
+                }
+            },
+            {
+            "produto": {
+                "nome": "Produto 03",
+                "preco": 500
+            }
+            }
+        ]
+    }
+
+###
+
+DELETE http://localhost:4001/vendas/33zFY4G5i
