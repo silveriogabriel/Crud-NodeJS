@@ -3,8 +3,8 @@ content-type: application/json
 
     {
 
-        "nome": "Gabriel Vinicius Silverio",
-        "cpf": "000.000.000-00",
+        "nome": "Rodrigo Egos",
+        "cpf": "400.289.221-90",
         "endereco": "Rua dos Bobos, 0"
     }
 
@@ -13,7 +13,7 @@ content-type: application/json
 GET http://localhost:4001/usuarios
 
 ###
-GET http://localhost:4001/vendas/ByGNa1Jbc
+GET http://localhost:4001/deletar/4
 ###
 PUT http://localhost:4001/vendas/ByGNa1Jbc
 content-type: application/json
