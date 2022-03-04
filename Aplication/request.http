@@ -1,17 +1,16 @@
-POST http://localhost:4001/vendas
+POST http://localhost:4001/cadastro
 content-type: application/json
 
     {
-        "cliente": {
-            "nome": "joão Marcos silva",
-            "cpf": "000.000.000-00",
-            "endereco": "Rua dos Bobos, 0"
-        }
+
+        "nome": "Gabriel Vinicius Silverio",
+        "cpf": "000.000.000-00",
+        "endereco": "Rua dos Bobos, 0"
     }
 
 ###
 
-GET http://localhost:4001/vendas
+GET http://localhost:4001/usuarios
 
 ###
 GET http://localhost:4001/vendas/ByGNa1Jbc

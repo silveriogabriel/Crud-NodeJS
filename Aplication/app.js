@@ -1,106 +1,93 @@
-//ultilizando express
-const express = require('express');
-const short = require('shortid')
-const fs = require('fs')
-const Sequelize = require('sequelize');
-const { ClientRequest } = require('http');
-const { json } = require('express/lib/response');
-const sequelize = new Sequelize('usuarios', 'root', '12345', {
-    host: "localhost",
-    dialect: 'mysql'
-})
+//Importando Modulos
+    const express = require('express');
+    const handlebars = require('express-handlebars');
+    const short = require('shortid')
+    const fs = require('fs')
+    const { ClientRequest } = require('http');
+    const { json } = require('express/lib/response');
+    const Cadastro = require('./models/Cadastro')
+    const Venda = require('./models/Vendas')
+    const db = require('./models/db')
 
-const Cliente = sequelize.define('cliente', {
-    nome: {
-        type: Sequelize.STRING
-    },
-    cpf: {
-        type: Sequelize.STRING
-    },
-    endereco: {
-        type: Sequelize.STRING
-    }
-})
-
-const Vendas = sequelize.define('vendas', {
-    produto : {
-        type: Sequelize.STRING
-    },
-    valor : {
-        type: Sequelize.FLOAT
-    }
-})
-
-
-sequelize.authenticate().then(function(){
-    console.log('Conectado Com sucesso!')
-}).catch(function(erro){
-    console.log('Falha ao se conectar: ' + erro)
-})
-
-const app = express();
-
-
-app.use(express.json())
-
-let vendas = [];
-
-fs.readFile("vendas.json", "utf-8", (err, data) => {
-    if(err) {
-        console.log(err);
-    }else{
-        vendas = JSON.parse(data)
-    }
-})
-
-app.post("/vendas", (request, response) => {
-    const {nome, cpf, endereco} = request.body;
-    Cliente.create({
-        nome: JSON.stringify(nome),
-        cpf: JSON.stringify(cpf),
-        endereco: JSON.stringify(endereco)
+//Verificando conexao com banco de dados
+    db.sequelize.authenticate().then(function(){
+        console.log('Conectado Com sucesso!')
+    }).catch(function(erro){
+        console.log('Falha ao se conectar: ' + erro)
     })
 
-    return response.json({
-        message: "Cliente cadastrado com sucesso!"
+const app = express(); // Instanciando express
+
+app.use(express.json()) // definindo que o express vai usar json
+// 'Banco de dados' inicial
+    let vendas = []; 
+
+    fs.readFile("vendas.json", "utf-8", (err, data) => {
+        if(err) {
+            console.log(err);
+        }else{
+        vendas = JSON.parse(data)
+        }
+    })
+//Template Engine
+    //app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+    //app.set('view engine', 'handlebars');
+
+// Rotas 
+    app.get('/', (req, res) => {
+        res.send('Paginas Backend:<br> /cadastro<br> /usuarios')
     });
-});
 
-app.get("/vendas", (request, response) => {
-    return response.json(vendas)
-});
+    app.post("/cadastro", (req, res) => {
+        const {nome, cpf, endereco} = req.body;
+        Cadastro.create({
+            nome: JSON.stringify(nome),
+            cpf: JSON.stringify(cpf),
+            endereco: JSON.stringify(endereco)
+        }).then(function(){
+            res.send('Cadastro realizado com sucesso!')
+        }).catch(function(){
+            res.send('Erro ao cadastrar!')
+        })
+    });
 
-app.get("/vendas/:id", (request, response) => {
-    const{id} = request.params
-    const venda = vendas.find(vendas => vendas.id === id);
-    return response.json(venda)
-});
+    app.get("/usuarios", (request, response) => {
+        Cadastro.findAll().then(function(usuarios){
+            response.send(usuarios)
+        })
+    });
 
-app.put("/vendas/:id", (request, response) => {
-    const{id} = request.params
-    const {data, cliente, itens} = request.body;
+    app.get("/vendas/:id", (request, response) => {
+        const{id} = request.params
+        const venda = vendas.find(vendas => vendas.id === id);
+        return response.json(venda)
+    });
 
-    const vendasindex = vendas.findIndex(venda => venda.id === id);
-    vendas[vendasindex] = {
-        ...vendas[vendasindex],
-        cliente,
-        data,
-        itens
-    }
-    createVendasFile()
-    return response.json({'mensagem' : 'Produto alterado com sucesso'})
-});
+    app.put("/vendas/:id", (request, response) => {
+        const{id} = request.params
+        const {data, cliente, itens} = request.body;
 
-app.delete("/vendas/:id", (request, response) => {
-    const {id} = request.params
-    const vendasindex = vendas.findIndex(venda => venda.id === id);
+        const vendasindex = vendas.findIndex(venda => venda.id === id);
+        vendas[vendasindex] = {
+            ...vendas[vendasindex],
+            cliente,
+            data,
+            itens
+        }
+        createVendasFile()
+        return response.json({'mensagem' : 'Produto alterado com sucesso'})
+    });
 
-    vendas.splice(vendasindex, 1);
-    return response.json({'mensagem': 'Produto removido com sucesso'})
-});
+    app.delete("/vendas/:id", (request, response) => {
+        const {id} = request.params
+        const vendasindex = vendas.findIndex(venda => venda.id === id);
 
+        vendas.splice(vendasindex, 1);
+        return response.json({'mensagem': 'Produto removido com sucesso'})
+    });
+//Fim Routes
 
-
+//Escrevendo no micro 'BD'
 function createVendasFile() {
     fs.writeFile("vendas.json", JSON.stringify(vendas), (err) => {
         if(err) {
@@ -112,4 +99,4 @@ function createVendasFile() {
 }
 
 
-app.listen(4001, () => console.log('Servidor rodando na porta 4001'));
+app.listen(4001, () => console.log('Servidor rodando na porta 4001')); //Rodando server
