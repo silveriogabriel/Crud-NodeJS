@@ -16,8 +16,11 @@
     "crypto": "^1.0.1",
     "express": "^4.17.3",
     "filesystem": "^1.0.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
     "nodeman": "^1.1.2",
     "nodemon": "^2.0.15",
-    "shortid": "^2.2.16"
+    "sequelize": "^6.17.0",
+    "shortid": "^2.2.8"
   }
 }

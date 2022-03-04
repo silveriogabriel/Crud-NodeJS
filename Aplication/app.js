@@ -2,6 +2,41 @@
 const express = require('express');
 const short = require('shortid')
 const fs = require('fs')
+const Sequelize = require('sequelize');
+const { ClientRequest } = require('http');
+const { json } = require('express/lib/response');
+const sequelize = new Sequelize('usuarios', 'root', '12345', {
+    host: "localhost",
+    dialect: 'mysql'
+})
+
+const Cliente = sequelize.define('cliente', {
+    nome: {
+        type: Sequelize.STRING
+    },
+    cpf: {
+        type: Sequelize.STRING
+    },
+    endereco: {
+        type: Sequelize.STRING
+    }
+})
+
+const Vendas = sequelize.define('vendas', {
+    produto : {
+        type: Sequelize.STRING
+    },
+    valor : {
+        type: Sequelize.FLOAT
+    }
+})
+
+
+sequelize.authenticate().then(function(){
+    console.log('Conectado Com sucesso!')
+}).catch(function(erro){
+    console.log('Falha ao se conectar: ' + erro)
+})
 
 const app = express();
 
@@ -18,28 +53,17 @@ fs.readFile("vendas.json", "utf-8", (err, data) => {
     }
 })
 
-/**
- * Post = inserir dados 
- * Get = Buscar dados
- * Put = alterar dado
- * delete = apagar
- * Body = sempre que eu quiser enviar dados para minha aplicacao
- * parametros = /produtos?/asdfsfgwegeg - obrigatorio
- * query = /produtos?id=EFWEF&ID=AEFJWKFJ
- */
-
 app.post("/vendas", (request, response) => {
-    const {data, cliente, itens} = request.body;
-    const venda ={
-        id: short(),
-        data,
-        cliente,
-        itens
-    }
-    vendas.push(venda);
-    createVendasFile()
+    const {nome, cpf, endereco} = request.body;
+    Cliente.create({
+        nome: JSON.stringify(nome),
+        cpf: JSON.stringify(cpf),
+        endereco: JSON.stringify(endereco)
+    })
 
-    return response.json(venda);
+    return response.json({
+        message: "Cliente cadastrado com sucesso!"
+    });
 });
 
 app.get("/vendas", (request, response) => {
@@ -74,6 +98,8 @@ app.delete("/vendas/:id", (request, response) => {
     vendas.splice(vendasindex, 1);
     return response.json({'mensagem': 'Produto removido com sucesso'})
 });
+
+
 
 function createVendasFile() {
     fs.writeFile("vendas.json", JSON.stringify(vendas), (err) => {

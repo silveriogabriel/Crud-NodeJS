@@ -1,17 +1,8 @@
-POST http://localhost:4001/vendas
-content-type: application/json
-
-    {
-        "cliente": {
-            "nome": "joão Marcos silva",
-            "cpf": "000.000.000-00",
-            "endereco": "Rua dos Bobos, 0"
-        }
-    }
+POST http://localhost:4001/login
 
 ###
 
-GET http://localhost:4001/vendas
+GET http://localhost:4001/create
 
 ###
 GET http://localhost:4001/vendas/ByGNa1Jbc

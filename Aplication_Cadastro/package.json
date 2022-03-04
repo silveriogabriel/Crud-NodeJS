@@ -1,0 +1,23 @@
+{
+  "name": "cadastro-backend",
+  "version": "1.0.0",
+  "description": "Trabalho Empresa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js",
+    "start": "nodemon src/index.js"
+  },
+  "author": "Gabriel Vinicius Silverio",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "ip": "^1.1.5",
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.17.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.4.1"
+  }
+}
