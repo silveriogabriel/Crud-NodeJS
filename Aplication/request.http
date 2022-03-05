@@ -3,7 +3,7 @@ content-type: application/json
 
     {
 
-        "nome": "Rodrigo Egoss",
+        "nome": "Joao de barro",
         "cpf": "400.289.221-90",
         "endereco": "Rua dos Bobos, 0"
     }
@@ -14,18 +14,3 @@ GET http://localhost:4001/users/show
 
 ###
 GET http://localhost:4001/users/deletar/6
-###
-PUT http://localhost:4001/vendas/ByGNa1Jbc
-content-type: application/json
-
-    {
-        "cliente": {
-            "nome": "Jdoão Marcos silva",
-            "cpf": "000.000.000-00",
-            "endereco": "Rua dos Bobos, 0"
-        }
-    }
-
-###
-
-DELETE http://localhost:4001/vendas/AIE8-vtv-
