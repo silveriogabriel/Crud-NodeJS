@@ -1,14 +1,11 @@
 # Crud-NodeJS
   <h2>Modo de usar</h2>
-  <ul>
-	
-<li> - Abra o cmd e navegue ate a pasta do programa com CD
-  <li> - Para iniciar basta digitar <b>" npm run dev "</b> No terminal
-	  <li> - As requests estao dentro do arquivo Requests.http
-</ul>
-	<h2>Depencias:</h2>
-	<ul>
-		<li> - Express
-		<li> - Shortid
-		<li> - NodeJS
-</ul>
+ -Execute o main.py para rodar o servidor ..
+ - Necessario ter NodeJS e Mysql instalado
+<h2>IMPORTANTE! </h2>
+Se for iniciar pelo main.py nescessario python 3.7+
+Caso queira rodar diretamente:
+
+ Navegue pelo cmd ate a pasta do projeto e execute "nom install" e em seguida "npm run dev"
+
+ Caso queira criar tabela no BD basta descomentar o codigo indicado em models/Cadastro!

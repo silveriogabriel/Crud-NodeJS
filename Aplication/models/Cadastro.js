@@ -13,6 +13,7 @@ const Cadastro = db.sequelize.define('cadastro', {
     }
 })
 
-//Cadastro.sync({ force: true })
+//Descomente o codigo abaixo para criar a tabela no banco de dados
+    //Cadastro.sync({ force: true })
 
 module.exports = Cadastro

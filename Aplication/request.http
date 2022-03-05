@@ -1,19 +1,19 @@
-POST http://localhost:4001/cadastro
+POST http://localhost:4001/users/cadastrar
 content-type: application/json
 
     {
 
-        "nome": "Rodrigo Egos",
+        "nome": "Rodrigo Egoss",
         "cpf": "400.289.221-90",
         "endereco": "Rua dos Bobos, 0"
     }
 
 ###
 
-GET http://localhost:4001/usuarios
+GET http://localhost:4001/users/show
 
 ###
-GET http://localhost:4001/deletar/4
+GET http://localhost:4001/users/deletar/6
 ###
 PUT http://localhost:4001/vendas/ByGNa1Jbc
 content-type: application/json
