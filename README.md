@@ -6,6 +6,6 @@
 Se for iniciar pelo main.py nescessario python 3.7+
 Caso queira rodar diretamente:
 
- Navegue pelo cmd ate a pasta do projeto e execute "nom install" e em seguida "npm run dev"
+ Navegue pelo cmd ate a pasta do projeto e execute "npm install" e em seguida "npm run dev"
 
- Caso queira criar tabela no BD basta descomentar o codigo indicado em models/Cadastro!
+ Caso queira criar tabela no BD basta descomentar o codigo indicado em models/Cadastro !
