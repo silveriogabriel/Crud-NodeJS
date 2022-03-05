@@ -13,7 +13,6 @@
   "author": "Gabriel Vinicius Silverio",
   "license": "MIT",
   "dependencies": {
-    "crypto": "^1.0.1",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
     "mysql": "^2.18.1",
